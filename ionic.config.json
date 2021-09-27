@@ -1,0 +1,7 @@
+{
+  "name": "piedra_papel_tijeras",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
