@@ -1,0 +1,10 @@
+img:hover {
+    cursor: pointer;
+}
+
+@media screen and (min-width: 600px) {
+    img {
+        width: 200px;
+        height: 200px;
+    }
+}
