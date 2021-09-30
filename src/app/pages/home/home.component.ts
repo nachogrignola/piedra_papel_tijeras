@@ -10,12 +10,14 @@ export class HomeComponent implements OnInit {
 
   message = ''
 
+  userShot = ''
+
   color = ''
 
   result: {
-    message: string;
     user: string;
     computer: string;
+    message: string;
   }
 
   images = [
@@ -41,11 +43,11 @@ export class HomeComponent implements OnInit {
   ngOnInit() {}
 
 
-  play = (user:string) => {
+  play = () => {
   
+    const USER = this.serviceHome.getChoiceFromComputer()
     const COMPUTER = this.serviceHome.getChoiceFromComputer()
-    const USER = user
-    this.resultado(USER, COMPUTER);
+    this.resultado(USER, COMPUTER)
   }
 
   resultado = (user:string, computer:string) => {
@@ -55,29 +57,32 @@ export class HomeComponent implements OnInit {
 
     //traducir mensaje
     const pc = this.traductor(computer)
+    const u = this.traductor(user)
 
     switch (choises) {
       case 'rs':
       case 'sp':
       case 'pr':
+        this.userShot = `Te toco: ${u}`
         this.message = `Ganaste, la computadora eligio ${pc}`
         this.color = 'success'
         this.result = {
-          message: 'Ganaste',
           user: user,
-          computer: computer
+          computer: computer,
+          message: 'Ganaste'
         };
         break;
       // Gana la computadora
       case 'rp':
       case 'ps':
       case 'sr':
+        this.userShot = `Te toco: ${u}`
         this.message = `Perdiste, la computadora eligio ${pc}`
         this.color = 'danger'
         this.result = {
-          message: 'Perdiste',
           user: user,
-          computer: computer
+          computer: computer,
+          message: 'Perdiste'
         };
         break;
       // Empatamos
@@ -87,24 +92,21 @@ export class HomeComponent implements OnInit {
         this.message = 'Empate, no esta tan mal..'
         this.color = 'warning'
         this.result = {
-          message: 'Empate',
           user: user,
-          computer: computer
+          computer: computer,
+          message: 'Empate'
         };
         break;
       }
   }
 
   traductor = (value:string) => {
-
     const dic = {
       r:'piedra',
       p:'papel',
       s:'tijeras'
     }
-
     return dic[value] 
-
   }
 
 }

@@ -7,12 +7,15 @@
   <ion-row class="ion-text-center">
     <ion-col *ngFor="let img of images">
       <div>
-        <img [src]="img.src" alt="img.alt" (click)="play(img.click)">
+        <img [src]="img.src" alt="img.alt">
       </div>
     </ion-col>
   </ion-row>
-  <h2 class="ion-text-center">SELECCIONA TU JUGADA...</h2>
   <div class="ion-text-center">
+    <ion-button color="primary" size="small" (click)="play()">Jugar</ion-button>
+  </div>
+  <div class="ion-text-center">
+    <p>{{userShot}}</p>
     <ion-badge color="{{color}}">{{message}}</ion-badge>
   </div>
   <app-result></app-result>
