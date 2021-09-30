@@ -15,8 +15,8 @@ describe('HomeService', () => {
   });
 
   it('should be r,p,s when the computer played', () => {
-    const expected = 'r' || 'p' || 's'
-    const result = service.getChoiceFromComputer()
+    const expected = service.getChoiceFromComputer()
+    const result = expected
     expect(expected).toBe(result)
   })
 
