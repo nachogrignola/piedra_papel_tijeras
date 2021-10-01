@@ -1,3 +1,12 @@
-<p>
-  result works!
-</p>
+<ion-grid *ngIf="results.length > 0">
+    <ion-row>
+      <ion-col>Usuario</ion-col>
+      <ion-col>Computadora</ion-col>
+      <ion-col>Resultado</ion-col>
+    </ion-row>
+    <ion-row *ngFor="let result of results">
+      <ion-col>{{ result.user }}</ion-col>
+      <ion-col>{{ result.computer }}</ion-col>
+      <ion-col>{{ result.message  }}</ion-col>
+    </ion-row>
+  </ion-grid>

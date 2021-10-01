@@ -1,6 +1,12 @@
-@media screen and (min-width: 600px) {
-    img {
-        width: 200px;
-        height: 200px;
-    }
+ion-img {
+    height: 100px;
 }
+
+@media screen and (max-width: 320px) {
+
+    ion-title {
+      font-size: x-small;
+    }
+
+}
+
