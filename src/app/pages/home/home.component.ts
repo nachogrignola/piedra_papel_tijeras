@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Result } from 'src/app/models/result';
 import { HomeService } from 'src/app/services/home.service';
+import { ResultService } from 'src/app/services/result.service';
 
 @Component({
   selector: 'app-home',
@@ -14,34 +16,17 @@ export class HomeComponent implements OnInit {
 
   color = ''
 
-  result: {
-    user: string;
-    computer: string;
-    message: string;
+  results = []
+
+  images = []
+
+  constructor(private serviceHome: HomeService, private resultService: ResultService) { 
+   this.images = this.serviceHome.getImages()
   }
 
-  images = [
-    {
-    src:'/assets/images/piedra.png',
-    alt:'rock',
-    click:'r'
-    },
-    {
-      src:'/assets/images/papel.png',
-      alt:'paper',
-      click:'p'
-    },
-    {
-        src:'/assets/images/tijeras.png',
-        alt:'scissors',
-        click:'s'
-    }
-]
+  ngOnInit() {
 
-  constructor(private serviceHome: HomeService) { }
-
-  ngOnInit() {}
-
+  }
 
   play = () => {
   
@@ -66,11 +51,7 @@ export class HomeComponent implements OnInit {
         this.userShot = `Te toco: ${u}`
         this.message = `Ganaste, la computadora eligio ${pc}`
         this.color = 'success'
-        this.result = {
-          user: user,
-          computer: computer,
-          message: 'Ganaste'
-        };
+        this.enviar(u,pc,'Ganaste');
         break;
       // Gana la computadora
       case 'rp':
@@ -79,23 +60,16 @@ export class HomeComponent implements OnInit {
         this.userShot = `Te toco: ${u}`
         this.message = `Perdiste, la computadora eligio ${pc}`
         this.color = 'danger'
-        this.result = {
-          user: user,
-          computer: computer,
-          message: 'Perdiste'
-        };
+        this.enviar(u,pc,'Perdiste');
         break;
       // Empatamos
       case 'rr':
       case 'pp':
       case 'ss':
+        this.userShot = `Te toco: ${u}`
         this.message = 'Empate, no esta tan mal..'
         this.color = 'warning'
-        this.result = {
-          user: user,
-          computer: computer,
-          message: 'Empate'
-        };
+        this.enviar(u,pc,'Empate');
         break;
       }
   }
@@ -104,9 +78,28 @@ export class HomeComponent implements OnInit {
     const dic = {
       r:'piedra',
       p:'papel',
-      s:'tijeras'
+      s:'tijera'
     }
     return dic[value] 
   }
+
+  enviar = (u:string, pc:string, message:string) => {
+    let result = new Result(u,pc, message);
+    this.resultService.saveResult(result).subscribe()
+    this.getResults()
+   }
+
+   getResults(){
+    this.resultService.getResult().subscribe(data => {
+      this.results = data;
+    })
+   }
+
+   reiniciar(){
+     this.resultService.deleteResults().subscribe();
+     this.resultService.getResult().subscribe( data => this.results = data);
+     this.message = '';
+     this.userShot = '';
+   }
 
 }
