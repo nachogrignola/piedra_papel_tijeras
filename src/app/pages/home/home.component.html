@@ -1,0 +1,27 @@
+  <ion-header>
+    <ion-toolbar class="ion-text-center">
+      <ion-title>¡Piedra, papel o tijeras!</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-grid>
+  <ion-row class="ion-text-center">
+    <ion-col *ngFor="let img of images">
+      <div>
+        <ion-img [src]="img.src" alt="img.alt"></ion-img>
+      </div>
+    </ion-col>
+  </ion-row>
+  <div class="ion-text-center">
+    <ion-button color="primary" size="small" (click)="play()">Jugar</ion-button>
+    <ion-button color="secondary" size="small" (click)="reiniciar()">Reiniciar</ion-button>
+  </div>
+    <div class="ion-text-center">
+      <p>{{userShot}}</p>
+      <ion-badge color="{{color}}">{{message}}</ion-badge>
+    </div>
+    <app-result [results]="results"></app-result>
+  <div *ngIf="empty" class="ion-text-center">
+    <ion-badge color="">No hay datos para mostrar</ion-badge>
+  </div>
+</ion-grid>
+
