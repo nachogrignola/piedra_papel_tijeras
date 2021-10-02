@@ -20,8 +20,11 @@ export class HomeComponent implements OnInit {
 
   images = []
 
+  empty = true
+
   constructor(private serviceHome: HomeService, private resultService: ResultService) { 
-   this.images = this.serviceHome.getImages()
+   this.images = this.serviceHome.getImages();
+   this.resultService.deleteResults().subscribe();
   }
 
   ngOnInit() {
@@ -87,6 +90,7 @@ export class HomeComponent implements OnInit {
     let result = new Result(u,pc, message);
     this.resultService.saveResult(result).subscribe()
     this.getResults()
+    this.empty = false;
    }
 
    getResults(){
@@ -98,6 +102,7 @@ export class HomeComponent implements OnInit {
    reiniciar(){
      this.resultService.deleteResults().subscribe();
      this.resultService.getResult().subscribe( data => this.results = data);
+     this.empty = true;
      this.message = '';
      this.userShot = '';
    }

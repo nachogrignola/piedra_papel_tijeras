@@ -15,10 +15,13 @@
     <ion-button color="primary" size="small" (click)="play()">Jugar</ion-button>
     <ion-button color="secondary" size="small" (click)="reiniciar()">Reiniciar</ion-button>
   </div>
-  <div class="ion-text-center">
-    <p>{{userShot}}</p>
-    <ion-badge color="{{color}}">{{message}}</ion-badge>
+    <div class="ion-text-center">
+      <p>{{userShot}}</p>
+      <ion-badge color="{{color}}">{{message}}</ion-badge>
+    </div>
+    <app-result [results]="results"></app-result>
+  <div *ngIf="empty" class="ion-text-center">
+    <ion-badge color="">No hay datos para mostrar</ion-badge>
   </div>
-  <app-result [results]="results"></app-result>
 </ion-grid>
 
