@@ -28,7 +28,6 @@ export class ResultService {
       map((res: any) => {
         return res
       }))
-
   }
   
   getResult(): Observable<any> {
@@ -44,8 +43,7 @@ export class ResultService {
 
   deleteResults(): Observable<any>  {
     let url = `${URL_SERVICE}/borrarResultados`
-    return this.http.delete(url)
-
+    return this.http.delete(url);
   }
 
 }
